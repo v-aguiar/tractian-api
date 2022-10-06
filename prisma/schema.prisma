@@ -6,3 +6,48 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model User {
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  cpf         String  @unique
+  phoneNumber Int
+  role        String
+  company     Company @relation(fields: [companyId], references: [id])
+  companyId   String  @db.ObjectId
+}
+
+model Company {
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  cnpj String @unique
+  User User[]
+  Unit Unit[]
+}
+
+model Unit {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  address   String
+  company   Company @relation(fields: [companyId], references: [id])
+  companyId String  @db.ObjectId
+  Asset     Asset[]
+}
+
+model Asset {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  model       String
+  images      String[]
+  description String
+  status      Status   @default(RUNNING)
+  healthLevel Int
+  owner       Unit     @relation(fields: [ownerId], references: [id])
+  ownerId     String   @db.ObjectId
+}
+
+enum Status {
+  RUNNING
+  ALERTING
+  STOPPED
+}
