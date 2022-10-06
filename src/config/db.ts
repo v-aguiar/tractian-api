@@ -5,6 +5,6 @@ export function connectDb(): void {
   prisma = new PrismaClient();
 }
 
-export async function disconnectDb(): Promise<void> {
+export async function disconnectDB(): Promise<void> {
   await prisma?.$disconnect();
 }

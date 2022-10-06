@@ -1,14 +1,18 @@
 ﻿import { prisma } from "@/config/db";
 
-interface CreateCompanyParams {
+export interface CreateCompanyParams {
   name: string;
   cnpj: string;
 }
 
-const userRepository = {
+export const companyRepository = {
   create: async (data: CreateCompanyParams) => {
     await prisma.company.create({
       data,
     });
+  },
+
+  getAll: async () => {
+    return await prisma.company.findMany({});
   },
 };
