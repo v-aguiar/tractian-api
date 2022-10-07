@@ -19,4 +19,8 @@ export const companyRepository = {
       },
     });
   },
+
+  getAll: async () => {
+    return await prisma.company.findMany();
+  },
 };

@@ -19,7 +19,7 @@ const users: Omit<User, "id">[] = [
 
 const company = {
   name: "Freios Supremos",
-  cnpj: "01.234.567./0001-99",
+  cnpj: "01234567000199",
 };
 
 const units: Omit<Unit, "id">[] = [
