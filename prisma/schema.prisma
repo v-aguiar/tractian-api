@@ -11,7 +11,7 @@ model User {
   id          String  @id @default(auto()) @map("_id") @db.ObjectId
   name        String
   cpf         String  @unique
-  phoneNumber Int
+  phoneNumber String
   role        String
   company     Company @relation(fields: [companyId], references: [id])
   companyId   String  @db.ObjectId
@@ -27,7 +27,7 @@ model Company {
 
 model Unit {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
-  name      String
+  name      String  @unique
   address   String
   company   Company @relation(fields: [companyId], references: [id])
   companyId String  @db.ObjectId
