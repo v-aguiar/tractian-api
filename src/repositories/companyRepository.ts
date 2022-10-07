@@ -12,7 +12,11 @@ export const companyRepository = {
     });
   },
 
-  getAll: async () => {
-    return await prisma.company.findMany({});
+  getByCNPJ: async (cnpj: string) => {
+    return await prisma.company.findUnique({
+      where: {
+        cnpj,
+      },
+    });
   },
 };

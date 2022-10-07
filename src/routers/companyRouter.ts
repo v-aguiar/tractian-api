@@ -1,22 +1,11 @@
 ﻿import { Router } from "express";
-import httpStatus from "http-status";
 
-import { companyRepository, CreateCompanyParams } from "@/repositories";
+import { createCompany } from "@/controllers";
+import { validateBody } from "@/middlewares";
+import { createCompanySchema } from "@/schemas";
 
 export const companyRouter = Router();
 
-companyRouter
-  .get("/", async (req, res) => {
-    const companies = await companyRepository.getAll();
+companyRouter.post("/", validateBody(createCompanySchema), createCompany);
 
-    res.status(httpStatus.OK).json(companies);
-  })
-  .post("/", async (req, res) => {
-    const data: CreateCompanyParams = req.body;
-
-    await companyRepository.create(data);
-
-    res.status(httpStatus.CREATED).send("✔ Company created!");
-  });
-
-// TODO: refactor -> Implement schema validation, separate into controllers, services and repositories
+// TODO: refactor -> separate into controllers, services and repositories
