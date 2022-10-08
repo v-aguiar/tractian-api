@@ -1,4 +1,4 @@
-﻿import { alreadyExistsError } from "@/errors";
+﻿import { alreadyExistsError, notFoundError } from "@/errors";
 import { CreateUserParams, userRepository } from "@/repositories";
 
 export const userService = {
@@ -7,5 +7,12 @@ export const userService = {
     if (user) throw alreadyExistsError("⚠ User already exists!");
 
     await userRepository.create(data);
+  },
+
+  getByCpf: async (cpf: string) => {
+    const user = await userRepository.getByCpf(cpf);
+    if (!user) throw notFoundError("⚠ User not found!");
+
+    return user;
   },
 };

@@ -1,6 +1,5 @@
 ﻿import { NextFunction, Request, Response } from "express";
 import { ObjectSchema } from "joi";
-import httpStatus from "http-status";
 
 import { unprocessableEntityError } from "@/errors";
 
@@ -17,7 +16,7 @@ export const validateParams = <T>(schema: ObjectSchema<T>): ValidationMiddleware
 const validate = (schema: ObjectSchema, type: "body" | "params") => {
   return (req: Request, res: Response, next: NextFunction) => {
     const { error } = schema.validate(req[type], { abortEarly: false });
-    if (error) return res.status(httpStatus.UNPROCESSABLE_ENTITY).json(unprocessableEntityError(error.details.map((detail) => detail.message)));
+    if (error) throw unprocessableEntityError(error.details.map((detail) => detail.message));
     return next();
   };
 };
