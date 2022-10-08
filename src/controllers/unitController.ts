@@ -9,3 +9,9 @@ export const createUnit = async (req: Request, res: Response) => {
   await unitService.create(data);
   res.status(httpStatus.CREATED).send("✔ Unit created!");
 };
+
+export const getUnitByName = async (req: Request, res: Response) => {
+  const { name } = req.params;
+  const unit = await unitService.getByName(name);
+  res.status(httpStatus.OK).send(unit);
+};

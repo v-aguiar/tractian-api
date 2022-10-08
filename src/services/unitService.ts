@@ -8,4 +8,11 @@ export const unitService = {
 
     await unitRepository.create(data);
   },
+
+  getByName: async (name: string) => {
+    const unit = await unitRepository.getbyName(name);
+    if (!unit) throw new Error("⚠ Unit not found!");
+
+    return unit;
+  },
 };

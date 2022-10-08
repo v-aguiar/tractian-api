@@ -1,9 +1,11 @@
 ﻿import { Router } from "express";
 
-import { validateBody } from "@/middlewares";
-import { createUnitSchema } from "@/schemas";
-import { createUnit } from "@/controllers";
+import { validateBody, validateParams } from "@/middlewares";
+import { createUnitSchema, unitNameParamSchema } from "@/schemas";
+import { createUnit, getUnitByName } from "@/controllers";
 
 export const unitRouter = Router();
 
-unitRouter.post("/", validateBody(createUnitSchema), createUnit);
+unitRouter
+  .post("/", validateBody(createUnitSchema), createUnit)
+  .get("/:name", validateParams(unitNameParamSchema), getUnitByName);

@@ -16,3 +16,14 @@ export const createUnitSchema = Joi.object<CreateUnitParams>({
     "string.empty": "⚠ Company ID cannot be an empty field!",
   }),
 });
+
+type Name = {
+  name: string;
+};
+
+export const unitNameParamSchema = Joi.object<Name>({
+  name: Joi.string().required().messages({
+    "string.base": "⚠ Name must be a string!",
+    "string.empty": "⚠ Name cannot be an empty field!",
+  }),
+});
