@@ -32,4 +32,11 @@ export const userService = {
 
     await userRepository.update(data);
   },
+
+  delete: async (cpf: string) => {
+    const user = await userRepository.getByCpf(cpf);
+    if (!user) throw notFoundError("⚠ User not found!");
+
+    await userRepository.delete(cpf);
+  },
 };

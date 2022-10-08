@@ -1,6 +1,6 @@
 ﻿import { Router } from "express";
 
-import { createUser, getCompanyByUserCpf, getUserByCpf, updateUserData } from "@/controllers";
+import { createUser, getCompanyByUserCpf, getUserByCpf, updateUserData, deleteUserByCpf } from "@/controllers";
 import { validateBody, validateParams } from "@/middlewares";
 import { cpfParamSchema, createUserSchema, updateUserSchema } from "@/schemas";
 
@@ -11,4 +11,5 @@ userRouter
   .use("/:cpf", validateParams(cpfParamSchema))
   .get("/:cpf", getUserByCpf)
   .get("/:cpf/company", getCompanyByUserCpf)
-  .put("/:cpf", validateBody(updateUserSchema), updateUserData);
+  .put("/:cpf", validateBody(updateUserSchema), updateUserData)
+  .delete("/:cpf", deleteUserByCpf);

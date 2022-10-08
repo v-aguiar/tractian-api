@@ -25,4 +25,10 @@ export const userRepository = {
       data,
     });
   },
+
+  delete: async (cpf: string) => {
+    await prisma.user.delete({
+      where: { cpf },
+    });
+  },
 };

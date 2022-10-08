@@ -31,3 +31,9 @@ export const updateUserData = async (req: Request, res: Response) => {
   await userService.update(updateUserData);
   res.status(httpStatus.OK).send("✔ User data updated!");
 };
+
+export const deleteUserByCpf = async (req: Request, res: Response) => {
+  const { cpf } = req.params;
+  await userService.delete(cpf);
+  res.status(httpStatus.OK).send("✔ User deleted!");
+};
