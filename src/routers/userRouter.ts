@@ -1,12 +1,14 @@
 ﻿import { Router } from "express";
 
-import { createUser, getCompanyByUserCpf, getUserByCpf } from "@/controllers";
+import { createUser, getCompanyByUserCpf, getUserByCpf, updateUserData } from "@/controllers";
 import { validateBody, validateParams } from "@/middlewares";
-import { cpfParamSchema, createUserSchema } from "@/schemas";
+import { cpfParamSchema, createUserSchema, updateUserSchema } from "@/schemas";
 
 export const userRouter = Router();
 
 userRouter
   .post("/", validateBody(createUserSchema), createUser)
-  .get("/:cpf", validateParams(cpfParamSchema), getUserByCpf)
-  .get("/:cpf/company", validateParams(cpfParamSchema), getCompanyByUserCpf);
+  .use("/:cpf", validateParams(cpfParamSchema))
+  .get("/:cpf", getUserByCpf)
+  .get("/:cpf/company", getCompanyByUserCpf)
+  .put("/:cpf", validateBody(updateUserSchema), updateUserData);

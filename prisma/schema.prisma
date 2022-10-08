@@ -17,6 +17,7 @@ model User {
   companyId   String   @db.ObjectId
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  Asset       Asset[]
 }
 
 model Company {
@@ -47,8 +48,10 @@ model Asset {
   description String
   status      Status    @default(RUNNING)
   healthLevel Int
-  owner       Unit      @relation(fields: [ownerId], references: [id])
+  owner       User      @relation(fields: [ownerId], references: [id])
   ownerId     String    @db.ObjectId
+  unit        Unit      @relation(fields: [unitId], references: [id])
+  unitId      String    @db.ObjectId
   createdAt   DateTime? @default(now())
   updatedAt   DateTime? @updatedAt
   lastCheck   DateTime?

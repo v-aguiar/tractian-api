@@ -1,4 +1,2 @@
-﻿export * from "./createCompanySchema";
-export * from "./createUserSchema";
-export * from "./cnpjParamSchema";
-export * from "./cpfParamSchema";
+﻿export * from "./userSchemas";
+export * from "./companySchemas";

@@ -1,7 +1,8 @@
 ﻿import { User } from "@prisma/client";
 import { prisma } from "@/config";
 
-export type CreateUserParams = Omit<User, "id">;
+export type CreateUserParams = Omit<User, "id" | "createdAt" | "updatedAt">;
+export type UpdateUserParams = Pick<CreateUserParams, "cpf"> & Partial<Omit<CreateUserParams, "cpf">>;
 
 export const userRepository = {
   create: async (data: CreateUserParams) => {
@@ -16,5 +17,12 @@ export const userRepository = {
     });
 
     return user;
+  },
+
+  update: async (data: UpdateUserParams) => {
+    await prisma.user.update({
+      where: { cpf: data.cpf },
+      data,
+    });
   },
 };

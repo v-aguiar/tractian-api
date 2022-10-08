@@ -1,7 +1,7 @@
 ﻿import { Request, Response } from "express";
 import httpStatus from "http-status";
 
-import type { CreateUserParams } from "@/repositories";
+import type { CreateUserParams, UpdateUserParams } from "@/repositories";
 import { userService } from "@/services";
 
 export const createUser = async (req: Request, res: Response) => {
@@ -20,4 +20,14 @@ export const getCompanyByUserCpf = async (req: Request, res: Response) => {
   const { cpf } = req.params;
   const company = await userService.getCompanyByUserCpf(cpf);
   res.status(httpStatus.OK).send(company);
+};
+
+type UpdateUserBody = Omit<UpdateUserParams, "cpf">;
+
+export const updateUserData = async (req: Request, res: Response) => {
+  const { cpf } = req.params;
+  const data: UpdateUserBody = req.body;
+  const updateUserData = { ...data, cpf };
+  await userService.update(updateUserData);
+  res.status(httpStatus.OK).send("✔ User data updated!");
 };

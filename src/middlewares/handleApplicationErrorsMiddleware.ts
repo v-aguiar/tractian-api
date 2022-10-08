@@ -19,6 +19,11 @@ export const handleApplicationErrors = (
     return res.status(httpStatus.CONFLICT).send({ message: err.message });
   }
 
+  if (err.name === "NotFoundError") {
+    console.error("NotFoundError: ", err);
+    return res.status(httpStatus.NOT_FOUND).send({ message: err.message });
+  }
+
   console.error("Internal Server Error: ", err);
   res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
     name: "Internal Server Error",
