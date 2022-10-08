@@ -4,7 +4,7 @@ import cors from "cors";
 
 import { connectDb, disconnectDB } from "@/config";
 import { handleApplicationErrors } from "@/middlewares";
-import { companyRouter, userRouter } from "@/routers";
+import { companyRouter, unitRouter, userRouter } from "@/routers";
 
 const app = express();
 app
@@ -13,6 +13,7 @@ app
   .get("/health", (_req, res) => res.send("OK!"))
   .use("/companies", companyRouter)
   .use("/users", userRouter)
+  .use("/units", unitRouter)
   .use(handleApplicationErrors);
 
 export function init(): Promise<Express> {

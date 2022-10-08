@@ -8,17 +8,16 @@ interface Cnpj {
 
 export const createCompanySchema = Joi.object<CreateCompanyParams>({
   name: Joi.string().required().messages({
-    "string.empty": "⚠ Nome da empresa é obrigatório",
-    "string.base": "⚠ Nome da empresa deve ser uma string",
+    "string.empty": "⚠ Name is required!",
+    "string.base": "⚠ Name must be a string!",
   }),
   cnpj: Joi.string()
     .regex(/^\d{14}$/)
     .required()
     .messages({
-      "string.empty": "⚠ CNPJ da empresa é obrigatório",
-      "string.base":
-        "⚠ CNPJ da empresa deve ser uma string de números, sem pontos, hífens, barras ou outros caracteres",
-      "string.pattern.base": "⚠ CNPJ da empresa deve ter 14 dígitos",
+      "string.empty": "⚠ CNPJ is required!",
+      "string.base": "⚠ CNPJ must be a string!",
+      "string.pattern.base": "⚠ CNPJ must have 14 digits, only numbers!",
     }),
 });
 
