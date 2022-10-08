@@ -1,5 +1,6 @@
-﻿import { CreateCompanyParams } from "@/repositories/companyRepository.js";
-import Joi from "joi";
+﻿import Joi from "joi";
+
+import type { CreateCompanyParams } from "@/repositories";
 
 export const createCompanySchema = Joi.object<CreateCompanyParams>({
   name: Joi.string().required().messages({
