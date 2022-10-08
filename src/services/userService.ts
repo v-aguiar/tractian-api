@@ -1,5 +1,5 @@
 ﻿import { alreadyExistsError, notFoundError } from "@/errors";
-import { CreateUserParams, userRepository } from "@/repositories";
+import { companyRepository, CreateUserParams, userRepository } from "@/repositories";
 
 export const userService = {
   create: async (data: CreateUserParams) => {
@@ -14,5 +14,15 @@ export const userService = {
     if (!user) throw notFoundError("⚠ User not found!");
 
     return user;
+  },
+
+  getCompanyByUserCpf: async (cpf: string) => {
+    const user = await userRepository.getByCpf(cpf);
+    if (!user) throw notFoundError("⚠ User not found!");
+
+    const company = await companyRepository.getById(user.companyId);
+    if (!company) throw notFoundError("⚠ Company not found!");
+
+    return company;
   },
 };

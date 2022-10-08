@@ -1,12 +1,12 @@
 ﻿import { Router } from "express";
 
 import { createCompany, getCompanyByCnpj, getAllCompanies } from "@/controllers";
-import { validateBody } from "@/middlewares";
-import { createCompanySchema } from "@/schemas";
+import { validateBody, validateParams } from "@/middlewares";
+import { cnpjParamSchema, createCompanySchema } from "@/schemas";
 
 export const companyRouter = Router();
 
 companyRouter
   .post("/", validateBody(createCompanySchema), createCompany)
   .get("/", getAllCompanies)
-  .get("/:cnpj", getCompanyByCnpj);
+  .get("/:cnpj", validateParams(cnpjParamSchema), getCompanyByCnpj);

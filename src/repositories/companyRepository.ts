@@ -23,4 +23,12 @@ export const companyRepository = {
   getAll: async () => {
     return await prisma.company.findMany();
   },
+
+  getById: async (id: string) => {
+    return await prisma.company.findUnique({
+      where: {
+        id,
+      },
+    });
+  },
 };

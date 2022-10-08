@@ -15,3 +15,9 @@ export const getUserByCpf = async (req: Request, res: Response) => {
   const user = await userService.getByCpf(cpf);
   res.status(httpStatus.OK).send(user);
 };
+
+export const getCompanyByUserCpf = async (req: Request, res: Response) => {
+  const { cpf } = req.params;
+  const company = await userService.getCompanyByUserCpf(cpf);
+  res.status(httpStatus.OK).send(company);
+};
