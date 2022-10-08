@@ -1,6 +1,8 @@
 ﻿import { PrismaClient, Unit, User } from "@prisma/client";
 
-const users: Omit<User, "id">[] = [
+import { CreateUserParams, CreateUnitParams } from "@/repositories";
+
+const users: CreateUserParams[] = [
   {
     phoneNumber: "11999999999",
     name: "Emerson José Pereira",
@@ -22,7 +24,7 @@ const company = {
   cnpj: "01234567000199",
 };
 
-const units: Omit<Unit, "id">[] = [
+const units: CreateUnitParams[] = [
   {
     name: "Unidade 1",
     address: "Rio de Janeiro, RJ",
