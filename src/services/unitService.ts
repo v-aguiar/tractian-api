@@ -1,6 +1,5 @@
 ﻿import { alreadyExistsError, notFoundError } from "@/errors";
-import { CreateUnitParams, unitRepository } from "@/repositories";
-import { companyRepository } from "../repositories/companyRepository";
+import { CreateUnitParams, unitRepository, companyRepository } from "@/repositories";
 
 export const unitService = {
   create: async (data: CreateUnitParams) => {
@@ -25,5 +24,12 @@ export const unitService = {
     if (!units) throw notFoundError("⚠ No unit found for this company!");
 
     return units;
+  },
+
+  deleteByName: async (name: string) => {
+    const unit = await unitRepository.getbyName(name);
+    if (!unit) throw notFoundError("⚠ Unit not found!");
+
+    await unitRepository.deleteByName(name);
   },
 };

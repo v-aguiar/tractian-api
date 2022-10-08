@@ -22,3 +22,9 @@ export const getUnitsByCompanyId = async (req: ValidatedRequest, res: Response) 
   const units = await unitService.getByCompanyId(companyId);
   res.status(httpStatus.OK).send(units);
 };
+
+export const deleteUnitByName = async (req: Request, res: Response) => {
+  const { name } = req.params;
+  await unitService.deleteByName(name);
+  res.status(httpStatus.OK).send("✔ Unit deleted!");
+};

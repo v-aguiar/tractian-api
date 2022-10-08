@@ -23,4 +23,10 @@ export const unitRepository = {
       },
     });
   },
+
+  deleteByName: async (name: string) => {
+    await prisma.unit.delete({
+      where: { name },
+    });
+  },
 };
