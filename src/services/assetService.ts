@@ -18,4 +18,11 @@ export const assetService = {
 
     await assetRepository.create(data);
   },
+
+  getByAlias: async (alias: string) => {
+    const asset = await assetRepository.getByAlias(alias);
+    if (!asset) throw notFoundError("⚠ Asset not found!");
+
+    return asset;
+  },
 };

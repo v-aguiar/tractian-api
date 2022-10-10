@@ -1,6 +1,10 @@
 ﻿import { Status } from "@prisma/client";
 import Joi from "joi";
-import { CreateAssetsParams } from "@/repositories";
+
+import type { CreateAssetsParams } from "@/repositories";
+interface Alias {
+  alias: string;
+}
 
 const createAssetSchema = Joi.object<CreateAssetsParams>({
   name: Joi.string().required().messages({
@@ -58,4 +62,11 @@ const createAssetSchema = Joi.object<CreateAssetsParams>({
 export const createAssetsSchema = Joi.array().items(createAssetSchema).required().messages({
   "array.base": "⚠ Body must have an array of assets",
   "array.empty": "⚠ Body cannot be empty",
+});
+
+export const assetAliasHeaderSchema = Joi.object<Alias>({
+  alias: Joi.string().required().messages({
+    "string.base": "⚠ Alias must be a string",
+    "string.empty": "⚠ Alias cannot be empty",
+  }),
 });

@@ -1,9 +1,9 @@
 ﻿import { Router } from "express";
 
-import { createAssets } from "@/controllers";
-import { validateBody } from "@/middlewares";
+import { createAssets, getByAlias } from "@/controllers";
+import { validateAssetAlias, validateBody } from "@/middlewares";
 import { createAssetsSchema } from "@/schemas";
 
 export const assetRouter = Router();
 
-assetRouter.post("/", validateBody(createAssetsSchema), createAssets);
+assetRouter.post("/", validateBody(createAssetsSchema), createAssets).get("/", validateAssetAlias, getByAlias);
