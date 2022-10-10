@@ -16,6 +16,12 @@ export const unitRepository = {
     });
   },
 
+  getById: async (id: string) => {
+    return await prisma.unit.findUnique({
+      where: { id },
+    });
+  },
+
   getByCompanyId: async (companyId: string) => {
     return await prisma.unit.findMany({
       where: {

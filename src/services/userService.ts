@@ -6,6 +6,9 @@ export const userService = {
     const user = await userRepository.getByCpf(data.cpf);
     if (user) throw alreadyExistsError("⚠ User already exists!");
 
+    const company = await companyRepository.getById(data.companyId);
+    if (!company) throw notFoundError("⚠ Company not found!");
+
     await userRepository.create(data);
   },
 

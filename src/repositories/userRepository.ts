@@ -1,4 +1,4 @@
-﻿import { User } from "@prisma/client";
+﻿import { User, Asset } from "@prisma/client";
 import { prisma } from "@/config";
 
 export type CreateUserParams = Omit<User, "id" | "createdAt" | "updatedAt">;
@@ -8,6 +8,12 @@ export const userRepository = {
   create: async (data: CreateUserParams) => {
     await prisma.user.create({
       data,
+    });
+  },
+
+  getById: async (id: string) => {
+    return await prisma.user.findUnique({
+      where: { id },
     });
   },
 

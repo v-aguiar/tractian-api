@@ -4,7 +4,7 @@ import cors from "cors";
 
 import { connectDb, disconnectDB } from "@/config";
 import { handleApplicationErrors } from "@/middlewares";
-import { companyRouter, unitRouter, userRouter } from "@/routers";
+import { assetRouter, companyRouter, unitRouter, userRouter } from "@/routers";
 
 const app = express();
 app
@@ -14,6 +14,7 @@ app
   .use("/companies", companyRouter)
   .use("/users", userRouter)
   .use("/units", unitRouter)
+  .use("/assets", assetRouter)
   .use(handleApplicationErrors);
 
 export function init(): Promise<Express> {

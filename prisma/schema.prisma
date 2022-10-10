@@ -43,6 +43,7 @@ model Unit {
 model Asset {
   id          String    @id @default(auto()) @map("_id") @db.ObjectId
   name        String
+  alias       String    @unique
   model       String
   images      String[]
   description String
