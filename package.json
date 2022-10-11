@@ -6,7 +6,7 @@
   "scripts": {
     "build": "ttsc --project tsconfig.json",
     "test": "jest --runInBand --detectOpenHandles",
-    "start": "node -r tsconfig-paths/register -r ts-node ./dist/src/server.js",
+    "start": "node ./dist/src/server.js",
     "dev": "nodemon --watch 'src/' --exec 'ts-node -r tsconfig-paths/register ./src/server.ts' -e ts"
   },
   "prisma": {
