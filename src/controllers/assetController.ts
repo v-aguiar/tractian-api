@@ -27,3 +27,10 @@ export const updateAsset = async (req: RequestWithAlias, res: Response) => {
 
   res.status(httpStatus.OK).send("✔ Asset updated!");
 };
+
+export const deleteAsset = async (req: RequestWithAlias, res: Response) => {
+  const { alias } = req;
+  await assetService.delete(alias);
+
+  res.status(httpStatus.OK).send("✔ Asset deleted!");
+};

@@ -49,4 +49,11 @@ export const assetService = {
 
     await assetRepository.update({ id: asset.id, ...data });
   },
+
+  delete: async (alias: string) => {
+    const asset = await assetRepository.getByAlias(alias);
+    if (!asset) throw notFoundError("⚠ Asset not found!");
+
+    await assetRepository.delete(asset.id);
+  },
 };

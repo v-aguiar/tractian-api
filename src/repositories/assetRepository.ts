@@ -24,4 +24,10 @@ export const assetRepository = {
       data,
     });
   },
+
+  delete: async (id: string) => {
+    return await prisma.asset.delete({
+      where: { id },
+    });
+  },
 };
