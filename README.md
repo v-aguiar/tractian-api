@@ -33,8 +33,7 @@ Api for assets management, where a user, as a part of a company, can add, update
 
 This API data is deployed on heroku, and you should be able to access all the endpoints and data on the link below:
 
-<br>Heroku deploy: </br> https://tractian-api.herokuapp.com/
-
+<br>Heroku deploy: </br> https://tractian-api-db.herokuapp.com/
 ## 🟢 Endpoints
 
 ### <b>Companies</b>
