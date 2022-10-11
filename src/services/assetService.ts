@@ -27,6 +27,16 @@ export const assetService = {
     return asset;
   },
 
+  getAssetsByUnitId: async (unitId: string) => {
+    const unit = await unitRepository.getById(unitId);
+    if (!unit) throw notFoundError("⚠ Unit not found!");
+
+    const assets = await assetRepository.getAssetsByUnitId(unitId);
+    if (assets.length === 0) throw notFoundError("⚠ No registered asset found for this unit!");
+
+    return assets;
+  },
+
   update: async ({ alias, ...data }: UpdateAssetParams & { alias: string }) => {
     const asset = await assetRepository.getByAlias(alias);
     if (!asset) throw notFoundError("⚠ Asset not found!");

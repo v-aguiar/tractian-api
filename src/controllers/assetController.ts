@@ -20,6 +20,13 @@ export const getByAlias = async (req: RequestWithAlias, res: Response) => {
   res.status(httpStatus.OK).send(asset);
 };
 
+export const getAssetsByUnitId = async (req: Request, res: Response) => {
+  const { unitId } = req.params;
+  const assets = await assetService.getAssetsByUnitId(unitId);
+
+  res.status(httpStatus.OK).send(assets);
+};
+
 export const updateAsset = async (req: RequestWithAlias, res: Response) => {
   const { alias } = req;
   const data: UpdateAssetParams = req.body;

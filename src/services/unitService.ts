@@ -6,6 +6,9 @@ export const unitService = {
     const unit = await unitRepository.getbyName(data.name);
     if (unit) throw alreadyExistsError("⚠ Unit already exists!");
 
+    const company = await companyRepository.getById(data.companyId);
+    if (!company) throw notFoundError("⚠ Company not found!");
+
     await unitRepository.create(data);
   },
 

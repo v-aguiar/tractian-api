@@ -18,6 +18,12 @@ export const assetRepository = {
     });
   },
 
+  getAssetsByUnitId: async (unitId: string) => {
+    return await prisma.asset.findMany({
+      where: { unitId },
+    });
+  },
+
   update: async ({ id, ...data }: UpdateAssetParams & { id: string }) => {
     return await prisma.asset.update({
       where: { id },
