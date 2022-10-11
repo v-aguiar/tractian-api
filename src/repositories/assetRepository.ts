@@ -1,6 +1,8 @@
 ﻿import { Asset } from "@prisma/client";
 import { prisma } from "@/config";
 
+import type { UpdateAssetParams } from "@/schemas";
+
 export type CreateAssetsParams = Omit<Asset, "id" | "createdAt" | "updatedAt">;
 
 export const assetRepository = {
@@ -12,9 +14,14 @@ export const assetRepository = {
 
   getByAlias: async (alias: string) => {
     return await prisma.asset.findUnique({
-      where: {
-        alias,
-      },
+      where: { alias },
+    });
+  },
+
+  update: async ({ id, ...data }: UpdateAssetParams & { id: string }) => {
+    return await prisma.asset.update({
+      where: { id },
+      data,
     });
   },
 };

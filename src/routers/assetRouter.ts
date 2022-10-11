@@ -1,9 +1,12 @@
 ﻿import { Router } from "express";
 
-import { createAssets, getByAlias } from "@/controllers";
+import { createAssets, getByAlias, updateAsset } from "@/controllers";
 import { validateAssetAlias, validateBody } from "@/middlewares";
-import { createAssetsSchema } from "@/schemas";
+import { createAssetsSchema, updateAssetSchema } from "@/schemas";
 
 export const assetRouter = Router();
 
-assetRouter.post("/", validateBody(createAssetsSchema), createAssets).get("/", validateAssetAlias, getByAlias);
+assetRouter
+  .post("/", validateBody(createAssetsSchema), createAssets)
+  .get("/", validateAssetAlias, getByAlias)
+  .put("/", validateAssetAlias, validateBody(updateAssetSchema), updateAsset);

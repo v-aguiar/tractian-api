@@ -2,6 +2,8 @@
 import Joi from "joi";
 
 import type { CreateAssetsParams } from "@/repositories";
+
+export type UpdateAssetParams = Partial<Omit<CreateAssetsParams, "alias">>;
 interface Alias {
   alias: string;
 }
@@ -62,6 +64,46 @@ const createAssetSchema = Joi.object<CreateAssetsParams>({
 export const createAssetsSchema = Joi.array().items(createAssetSchema).required().messages({
   "array.base": "⚠ Body must have an array of assets",
   "array.empty": "⚠ Body cannot be empty",
+});
+
+export const updateAssetSchema = Joi.object<CreateAssetsParams>({
+  name: Joi.string().messages({
+    "string.base": "⚠ Name must be a string",
+  }),
+  model: Joi.string().messages({
+    "string.base": "⚠ Model must be a string",
+  }),
+  description: Joi.string().messages({
+    "string.base": "⚠ Description must be a string",
+  }),
+  healthLevel: Joi.number().integer().min(0).max(100).messages({
+    "number.base": "⚠ Health Level must be a number",
+    "number.integer": "⚠ Health Level must be an integer",
+    "number.min": "⚠ Health Level must be greater than or equal to 0",
+    "number.max": "⚠ Health Level must be less than or equal to 100",
+  }),
+  images: Joi.array().items(Joi.string().uri()).messages({
+    "array.base": "⚠ Images must be an array",
+    "string.base": "⚠ Each image inside the array must be of type string",
+  }),
+  status: Joi.string()
+    .valid(...Object.values(Status))
+    .messages({
+      "string.base": "⚠ Status must be a string",
+      "any.only": "⚠ Status must be one of the following: 'RUNNING', 'ALERTING', 'STOPPED'",
+    }),
+  ownerId: Joi.string().messages({
+    "string.base": "⚠ Owner ID must be a string",
+  }),
+  unitId: Joi.string().messages({
+    "string.base": "⚠ Unit ID must be a string",
+  }),
+  lastCheck: Joi.date().messages({
+    "date.base": "⚠ Last check must be a date",
+  }),
+  nextCheck: Joi.date().messages({
+    "date.base": "⚠ Next check must be a date",
+  }),
 });
 
 export const assetAliasHeaderSchema = Joi.object<Alias>({
